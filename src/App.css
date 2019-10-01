@@ -1,0 +1,19 @@
+.App {
+  text-align: center;
+}
+
+.center{
+  display:flex;
+  justify-content: center;
+}
+
+.Particles{
+    position: fixed;
+    height:1300px;
+    margin-top:-1000px;
+    padding-top: 250px;
+    z-index: -1;
+    width:1920px;
+}
+
+
