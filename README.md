@@ -1,68 +1,69 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# FaceRecognition Website/App
 
-## Available Scripts
+## Description
 
-In the project directory, you can run:
+A web application that accepts a link and by using Clarifai ML API, displays a small box around faces. Also supports register feature and signin. The app is still at a starting stage.
 
-### `npm start`
+## Warning
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Due to complications of bcrypt package, I was unable to upload this project on Hiroku, and thus use database that is needed for this app to function. Instructions on how to get a PostgreSQL database and on how to run the website are given below. Thank you for your understanding
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+## Pre-requisities
 
-### `npm test`
+### 1. Node JS
+### 2. NPM
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+## Instructions
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 1. Clone this repository on your PC, by running
+```
+git clone https://github.com/JimBratsos/FaceRecognition
+```
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+### 2. After downloading/cloning, simply run:
+```
+npm start
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 3. Clone the other repository available on my GitHub in order for this to work and also run it with these commands:
+```
+git clone https://github.com/JimBratsos/facerecognitionserver
+npm start
+```
+### 4. Download PostgreSQL and setup your account.
+https://www.postgresql.org/download/
 
-### `npm run eject`
+#### 4i. If you have windows , you need to add two new env variables in order for this to work on CMD. Simply you search for "Edit the System's Enviromental Variables", go to Enviromental Variables and then add two new paths:
+```
+C:\Program Files\PostgreSQL\11\lib
+C:\Program Files\PostgreSQL\11\bin
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### 5. Create two tables; one called login and the other called users with the following commands; 
+```
+CREATE TABLE login(
+id serial PRIMARY KEY,
+hash varchar(100) NOT NULL,
+email text UNIQUE NOT NULL
+);
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+CREATE TABLE users(
+id serial PRIMARY KEY,
+name varchar(100),
+email text UNIQUE NOT NULL,
+entries BIGINT DEFAULT 0,
+joined TIMESTAMP NOT NULL
+);
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### 6. On server.js file provided with the aforementioned facerecognitionserver folder needed for this website to work, change the API key with your own Clarifai key after signing up for free at their website, and also change your DB credentials by adding you DB name, your username and password.
+https://portal.clarifai.com/signup
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Made with love
+This project is built using:
+1. NodeJS and Express for backend
+2. JS, HTML, CSS and React Framework for Front-End
+3. PostgreSQL for database usage
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+THANK YOU :)
